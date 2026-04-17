@@ -1,4 +1,4 @@
-const API_URL = 'calculadora-cashback-production.up.railway.app'; 
+const API_URL = 'https://calculadora-cashback-production.up.railway.app'; 
 
 carregarHistorico();
 
