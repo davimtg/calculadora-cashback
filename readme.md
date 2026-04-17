@@ -17,7 +17,8 @@ Aqui está uma prévia da aplicação em funcionamento, apresentando o cálculo 
 ## Estrutura do Projeto
 
 O projeto foi dividido para atender a todas as etapas do enunciado de forma organizada:
-
+- **`Desafio_Nology_Questoes_1_a_4_Davi_Guimaraes.pdf`** (Raiz): Documento com a resolução dissertativa e detalhada das **Questões 1 a 4**.
+- **`Desafio Nology - Estagiário de Dev 2026.pdf`** (Raiz): Documento original com as instruções e requisitos do desafio da Nology.
 - **`calculo_basico.py`** (Raiz): Script em Python puro com a lógica de cálculo via terminal, respondendo aos requisitos das **Questões 1 a 4**.
 - **`/backend`**: API desenvolvida em Python com Flask, responsável pelo cálculo remoto e persistência no banco de dados (**Questão 5**).
 - **`/front`**: Interface web estática em HTML, CSS e JavaScript puro, integrada à API (**Questão 5**).
