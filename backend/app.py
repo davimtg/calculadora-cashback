@@ -39,7 +39,7 @@ def func():
     salvaBD(ip_usuario,valorCompra, valorCashback, tipo_cliente, )
     return jsonify({"cashback": valorCashback})
 def salvaBD (ip, valorCompra, valorCashback, tipo_cliente):
-    DATABASE_URL = "postgresql://desafio_nology_user:UEq7M3VTLzHKMqgkEPASOkr5CEEqCroc@dpg-d7h2bjhj2pic738m6su0-a.virginia-postgres.render.com/desafio_nology"
+    DATABASE_URL = os.environ.get('DATABASE_URL')
 
     # Usamos %s como marcadores de posição
     comando_insert = """
@@ -66,8 +66,7 @@ def salvaBD (ip, valorCompra, valorCashback, tipo_cliente):
 @app.route('/historico', methods=['GET'])
 def obter_historico():
     ip_usuario = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0].strip()
-    DATABASE_URL = "postgresql://desafio_nology_user:UEq7M3VTLzHKMqgkEPASOkr5CEEqCroc@dpg-d7h2bjhj2pic738m6su0-a.virginia-postgres.render.com/desafio_nology"
-
+    DATABASE_URL = os.environ.get('DATABASE_URL')
     try:
         conexao = psycopg2.connect(DATABASE_URL)
         cursor = conexao.cursor()
