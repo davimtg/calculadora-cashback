@@ -11,9 +11,8 @@ def func():
     # --- Código antigo ---
     # ip_usuario = request.remote_addr
     # ---------------------
-    # Problema: Na nuvem (Railway), a API fica atrás de um "proxy" (um roteador intermediário).
-    # O 'remote_addr' clássico estava pegando o IP rotativo desse proxy, o que fazia o histórico 
-    # falhar ou sumir ao recarregar a página.
+    # Problema: Na nuvem (Railway), a API fica atrás de um "proxy".
+    # O 'remote_addr' estava pegando o IP rotativo desse proxy, o que fazia o histórico falhar ou sumir ao recarregar a página.
     # Solução: Usar o cabeçalho 'X-Forwarded-For', que é onde o proxy repassa o IP real original do usuário.
     ip_usuario = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0].strip()
     dados = request.get_json()
