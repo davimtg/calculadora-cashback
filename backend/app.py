@@ -7,8 +7,17 @@ app = Flask(__name__)
 CORS(app)
 @app.route('/calcular', methods=['POST'])
 def func():
-    ip_usuario = request.remote_addr
+    # Nota: Recorri ao Gemini para ajustar a forma de capturar o IP.
+    # --- Código antigo ---
+    # ip_usuario = request.remote_addr
+    # ---------------------
+    # Problema: Na nuvem (Railway), a API fica atrás de um "proxy" (um roteador intermediário).
+    # O 'remote_addr' clássico estava pegando o IP rotativo desse proxy, o que fazia o histórico 
+    # falhar ou sumir ao recarregar a página.
+    # Solução: Usar o cabeçalho 'X-Forwarded-For', que é onde o proxy repassa o IP real original do usuário.
+    ip_usuario = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0].strip()
     dados = request.get_json()
+
     valorCompra = dados['valor_compra']
     descontoCupom = dados['desconto_cupom']
     eVip = dados['e_vip']
@@ -57,8 +66,7 @@ def salvaBD (ip, valorCompra, valorCashback, tipo_cliente):
 
 @app.route('/historico', methods=['GET'])
 def obter_historico():
-    ip_usuario = request.remote_addr
-    
+    ip_usuario = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0].strip()
     DATABASE_URL = "postgresql://desafio_nology_user:UEq7M3VTLzHKMqgkEPASOkr5CEEqCroc@dpg-d7h2bjhj2pic738m6su0-a.virginia-postgres.render.com/desafio_nology"
 
     try:
